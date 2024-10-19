@@ -1,4 +1,4 @@
-/*Write a program in C++ to */
+/*Write a program in C++ to find 2^n using recursion */
 #include<iostream>
 using namespace std;
 int power(int n){
