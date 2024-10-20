@@ -2,17 +2,24 @@
 #include<iostream>
 using namespace std;
 void sayDigit(int n , string arr[]){
-      if (n == 0)  // base case
+      if (n == 0) 
             return;
 
-        int rem = n % 10;
-        int nextDigit = n / 10;
-
-        sayNumber(nextDigit, arr); // recursive relation
-
-        System.out.print(arr[rem] + " ");
+        int digit = n % 10;
+        n = n / 10;
+        sayDigit(n, arr);
+        cout<<arr[digit]<<" ";
 }
 int main()
 {
-    
+     string arr[10] = {"Zero", "One", "Two", "Three", "Four",
+                "Five", "Six", "Seven", "Eight",
+                "Nine"};
+      int n;
+      cout<<"Enter the number=>";
+      cin>>n;
+      cout<<endl<<endl<<endl;
+      sayDigit(n,arr);
+      cout<<endl<<endl<<endl;
+      return 0;
 }
