@@ -9,8 +9,14 @@ class Hero{
     int energy;
 
     //creating constructor
-    Hero(){
-        cout<<"Constructor created successfully"<<endl;
+    Hero(int health){
+        cout<<"this->"<<this<<endl;
+        this->health=health;
+    }
+    Hero(int health,char level){
+        cout<<"this->"<<this<<endl;
+        this->health=health;
+        this->level=level;
     }
 
     int getHealth(){
@@ -35,7 +41,14 @@ class Hero{
 };
 int main()
 {
-   Hero peter;
+    //parameterised constructor
+   Hero peter(10);
+   cout<<"address of peter="<<&peter<<endl;
+   peter.getHealth();
+
+    Hero tom(16,'C');
+   cout<<"address of tom="<<&tom<<endl;
+   tom.getLevel();
 
    peter.setHealth(70);
    cout<<"Health="<<peter.getHealth()<<endl;
@@ -47,7 +60,7 @@ int main()
    cout<<"Level:"<<peter.getLevel()<<endl;
 
    //dynamically creating object
-   Hero *parker=new Hero;
+   Hero *parker=new Hero(11);
    (*parker).setHealth(50);
    (*parker).setLevel('K');
    (*parker).setEnergy(60);
