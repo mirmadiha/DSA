@@ -14,18 +14,34 @@ class Node{
     }
 };
 
-void InsertAtHead(Node*&head,int d){
-
-    //new node created
-    Node *temp=new Node(d);
+void InsertAtHead(Node*&head,Node *temp){
     temp->next=head;
     head=temp;
 }
 
-void InsertAtTail(Node* &tail,int data){
-    Node *temp=new Node(data);
+void InsertAtTail(Node* &tail,Node *temp){
     tail->next=temp;
     tail=tail->next;
+}
+
+void insertInMiddle(int position,Node *NodeToInsert,Node* &head, Node* &tail){
+    Node *temp=head;
+    int count=1;
+    if(position==1){
+        InsertAtHead(head,NodeToInsert);
+        return;
+    }
+    while(count<position-1 && temp->next!=NULL){
+        temp=temp->next;
+        count++;
+    }
+    if(temp->next==NULL){
+        InsertAtTail(tail,NodeToInsert);
+    }
+    else{
+    NodeToInsert->next=temp->next;
+    temp->next=NodeToInsert;
+    }
 }
 
 //traverse a linked list
@@ -46,15 +62,21 @@ int main()
 
     Node *head=node1;
     Node *tail=node1;
+    Node *middle=new Node(45);
+    Node *node2=new Node(48);
+    Node *node3=new Node(8);
     print(head);
-    InsertAtTail(tail,3);
-    // print(head);
-
-    // InsertAtHead(head,66);
-    // print(head);
-
+    InsertAtTail(tail,node2);
     print(head);
 
+    InsertAtHead(head,node3);
+    print(head);
 
+    insertInMiddle(4,middle,head,tail);
+
+    print(head);
+
+    cout<<"head: "<<head->data<<endl;
+    cout<<"tail: "<<tail->data<<endl;
     return 0;
 }
