@@ -7,11 +7,22 @@ class Node
     int data;
     Node* prev;
     Node* next;
-
+    //constructor
     Node(int d){
         this->data=d;
         this->prev=NULL;
         this->next=NULL;
+    }
+    //destructor
+    ~Node(){
+        int value=this->data;
+        if(this->next!=NULL){
+            delete next;
+            delete prev;
+            this->next=NULL;
+            this->prev=NULL;
+        }
+        cout<<"Memory free for node with data: "<<value<<endl;
     }
 };
 
@@ -89,6 +100,30 @@ void insertAtMiddle(int position,int d,Node* &head,Node* &tail){
     }
     }
 }
+void deleteNode(int position,Node* &head,Node* &tail){
+    if(position==1){
+        Node*temp=head;
+        head=temp->next;
+        temp->next=NULL;
+        delete temp;
+    }
+    else{
+    int count=1;
+    Node*curr=head;
+    Node*  prev=NULL;
+        while(count<position){
+            prev=curr;
+            curr=curr->next;
+            count++;
+        }
+        if(curr->next==NULL){
+            tail=curr->prev;
+        }
+        prev->next=curr->next;
+        curr->next=NULL;
+        delete curr;
+        }
+}
 
 int main()
 {
@@ -124,6 +159,11 @@ int main()
    cout<<"tail: "<<tail->data<<endl;
 
    insertAtMiddle(6,78,head,tail);
+   print(head);
+   cout<<"head: "<<head->data<<endl;
+   cout<<"tail: "<<tail->data<<endl;
+
+   deleteNode(7,head,tail);
    print(head);
 
    cout<<"head: "<<head->data<<endl;
