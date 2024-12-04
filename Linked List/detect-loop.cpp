@@ -143,6 +143,29 @@ Node* floydsDetectionCycle(Node* head){
     return NULL;
 }
 
+Node* getStartingNode(Node* head){
+    if(head==NULL){
+        return head;
+    }
+
+    Node* intersection= floydsDetectionCycle(head);
+    Node* slow=head;
+    while(slow!=intersection){
+        slow=slow->next;
+        intersection=intersection->next;
+    }
+    return slow;
+}
+void removeLoop(Node* head){
+    Node* startOfLoop=getStartingNode(head);
+    Node*temp=startOfLoop->next;
+    while(temp->next!=startOfLoop){
+        temp=temp->next;
+    }
+    temp->next=NULL;
+}
+
+
 int main()
 {
     Node *node1=new Node(10);
@@ -166,7 +189,7 @@ int main()
 
     print(head);
 
-    // tail->next=head->next;
+    tail->next=head->next;
 
     // if(detectLoop(head)){
     //     cout<<"cycle is present!"<<endl;
@@ -181,8 +204,18 @@ int main()
         cout<<"cycle not present!"<<endl;
     }
 
+    cout<<"starting at: "<<getStartingNode(head)->data<<endl;
+
     // deleteNode(4,head,tail);
     // print(head);
+    removeLoop(head);
+
+    if(floydsDetectionCycle(head)!=NULL){
+        cout<<"cycle is present"<<endl;
+    }
+    else{
+        cout<<"cycle not present!"<<endl;
+    }
 
     cout<<"head: "<<head->data<<endl;
     cout<<"tail: "<<tail->data<<endl;
