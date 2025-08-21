@@ -27,6 +27,35 @@ class heap{
            }
         }
     }
+
+        void deleteFromHeap(){
+            if(size==0){
+                cout<<"nothing to delete"<<endl;
+                return;
+            }
+                arr[1]=arr[size];
+                size--;
+                //take rooot node to its correct position
+
+                int i=1;
+                while(i<size){
+                    int left=2*i;
+                    int right=2*i+1;
+                    if(left<size && arr[i]<arr[left]){
+                        swap(arr[i],arr[left]);
+                        i=left;
+                    }
+
+                    else if(right<size && arr[i]<arr[right]){
+                        swap(arr[i],arr[right]);
+                        i=right;
+                    }
+
+                    else{
+                        return;
+                    }
+                }
+        }
     void print(){
         for(int i=1;i<=size;i++){
             cout<<arr[i]<<" ";
@@ -43,5 +72,9 @@ int main () {
     h.insert(52);
     h.insert(54);
     h.print(); 
+    h.deleteFromHeap();
+
+    h.print();
+
     return 0; 
 }
