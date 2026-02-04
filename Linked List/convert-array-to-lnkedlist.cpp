@@ -32,5 +32,9 @@ Node* convertArrayToLinkedList(vector<int>&arr){
 int main () {
     vector<int>arr={2,6,4,64,5,3};
     Node* result=convertArrayToLinkedList(arr);
-    cout<<result->data<<endl;
+    Node* temp= result;
+    while(temp!=nullptr){
+        cout<<temp->data<<endl;
+        temp=temp->next;
+    }
 }
