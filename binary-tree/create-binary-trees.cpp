@@ -59,6 +59,33 @@ void postorderTraversal(Node* root){
     cout<<root->data<<" ";
 }
 
+vector<vector<int>> levelOrderTraversal(Node* root){
+    vector<vector<int>> ans;
+    if(root == NULL) return ans;
+
+    queue<Node*> q;
+    vector<int> level;
+
+    q.push(root);
+    while(!q.empty()){
+        int size = q.size();
+        for(int i=0;i<size;i++){
+            Node* node = q.front();
+            q.pop();
+            if(node->left != NULL){
+                q.push(node->left);
+            }
+            if(node->right != NULL){
+                q.push(node->right);
+            }
+            level.push_back(node->data);
+        }
+        ans.push_back(level);
+    }
+    return ans;
+}
+    
+
 int main(){
     Node* root = createBinaryTree();
 
@@ -72,6 +99,16 @@ int main(){
 
     cout<<"Postorder Traversal: ";
     postorderTraversal(root);
+    cout<<endl;
+
+    cout<<"Level Order Traversal: ";
+    vector<vector<int>> levelOrder = levelOrderTraversal(root);
+    for(int i=0;i<levelOrder.size();i++){
+        for(int j=0;j<levelOrder[i].size();j++){
+            cout<<levelOrder[i][j]<<" ";
+        }
+        cout<<endl;
+    }
     cout<<endl;
     return 0;
 }
